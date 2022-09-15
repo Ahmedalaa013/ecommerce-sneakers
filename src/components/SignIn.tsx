@@ -30,7 +30,8 @@ const SignIn = () => {
               const cc = usersData.map(
                 (user: any) => user.email === email && user.pwd === pwd
               );
-              if (cc[0] === true) {
+              const yy = cc.find((element: any) => element === true);
+              if (yy === true) {
                 routeChange();
               } else {
                 alert("Please Enter the right credentials");

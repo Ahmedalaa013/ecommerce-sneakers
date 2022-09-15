@@ -28,12 +28,17 @@ const SignUp = () => {
             onSubmit={(e) => {
               e.preventDefault();
               let retrievedObject: any = localStorage.getItem("users");
-              if (retrievedObject) {
-                allUsers.push(JSON.parse(retrievedObject));
+              if (retrievedObject === null) {
+                allUsers.push({ fname, email, pwd });
+                localStorage.setItem("users", JSON.stringify(allUsers));
+                routeChange();
+              } else {
+                const usersData = JSON.parse(retrievedObject);
+                usersData.push({ fname, email, pwd });
+                allUsers = usersData;
+                localStorage.setItem("users", JSON.stringify(allUsers));
+                routeChange();
               }
-              allUsers.push({ fname, email, pwd });
-              localStorage.setItem("users", JSON.stringify(allUsers));
-              routeChange();
             }}
           >
             <input type="hidden" name="remember" defaultValue="true" />
